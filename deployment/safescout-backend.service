@@ -1,0 +1,23 @@
+[Unit]
+Description=SafeScout MINE-ENERGY - Industrial Rover FastAPI Server & Navigation Host
+After=network.target network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/safescout/DASHBOARD
+EnvironmentFile=/home/pi/safescout/DASHBOARD/.env
+ExecStart=/usr/bin/python3 -m backend.run_backend
+Restart=always
+RestartSec=3
+KillMode=process
+StandardOutput=journal
+StandardError=journal
+
+# Hardware Access Permissions
+SupplementaryGroups=dialout i2c gpio video
+
+[Install]
+WantedBy=multi-user.target
+
